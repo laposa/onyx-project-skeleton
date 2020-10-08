@@ -1,0 +1,11 @@
+.DS_Store
+thumbs.db
+__MACOSX
+._*
+*~
+*.swp
+var/
+_resources/
+.git
+.env*
+onyx/
