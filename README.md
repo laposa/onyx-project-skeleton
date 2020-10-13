@@ -8,7 +8,19 @@ unzip v2.0-pre1.zip
 cd onyx-project-skeleton-2.0-pre1/
 composer install
 ln -s vendor/laposa/onyx/
+chmod a+w -R var/
 ```
+### DB configuration
+```bash
+sudo -u postgres psql
+
+CREATE USER onyx WITH ENCRYPTED PASSWORD 'onyx';
+CREATE DATABASE onyx;
+GRANT ALL PRIVILEGES ON DATABASE onyx TO onyx;
+
+PGPASSWORD=onyx psql -h localhost -U onyx onyx < _resources/base.sql
+```
+Configure db connection in .env file.
 
 ## Build Docker image
 
