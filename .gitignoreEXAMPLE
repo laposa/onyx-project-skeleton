@@ -5,6 +5,7 @@ __MACOSX
 ._*
 *~
 *.swp
-var/
-_resources/
-
+/var/
+/_resources/
+/vendor/
+.env*
