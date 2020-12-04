@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update \
   && apt-get -y upgrade \
   && apt-get install -y apache2 php php-fpm php-recode php-pgsql php-tidy php-gd php-imagick php-curl php-mcrypt php-xml\
-  php-mbstring postgresql-client imagemagick php-memcached php-memcache php-soap php-zip php-bcmath unzip memcached \
+  php-mbstring postgresql-client imagemagick php-memcached php-memcache php-soap php-zip php-bcmath php-intl unzip memcached \
   supervisor curl wget gnupg apt-transport-https vim locales-all
 
 COPY ./etc/ /etc/
