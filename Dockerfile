@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:buster
 
 USER root
 
@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update \
   && apt-get -y upgrade \
-  && apt-get install -y apache2 php php-fpm php-recode php-pgsql php-tidy php-gd php-imagick php-curl php-mcrypt php-xml\
+  && apt-get install -y apache2 php php-fpm php-recode php-pgsql php-tidy php-gd php-imagick php-curl php-xml\
   php-mbstring postgresql-client imagemagick php-memcached php-memcache php-soap php-zip php-bcmath php-intl unzip memcached \
   supervisor curl wget gnupg apt-transport-https vim locales-all
 
@@ -24,17 +24,16 @@ RUN a2enmod vhost_alias ssl rewrite expires headers deflate
 
 # enable php-fpm
 RUN a2enmod proxy_fcgi setenvif \
-  && a2enconf php7.0-fpm \
-  && a2dismod php7.0
+  && a2enconf php7.3-fpm
+
+# need this to create /run/php/php7.3-fpm.pid and /run/php/php7.3-fpm.sock
+RUN service php7.3-fpm start
 
 # logs should go to stdout / stderr
 RUN ln -sfT /dev/stderr /var/log/apache2/error.log \
         && ln -sfT /dev/stdout /var/log/apache2/access.log \
         && ln -sfT /dev/stdout /var/log/apache2/other_vhosts_access.log \
-        && ln -sfT /dev/stdout /var/log/php7.0-fpm.log
-
-# need this to create /run/php/php7.0-fpm.pid and /run/php/php7.0-fpm.sock
-RUN service php7.0-fpm start
+        && ln -sfT /dev/stdout /var/log/php7.3-fpm.log
 
 # can be overwriten in k8s?
 ENV APACHE_LISTEN_PORT 8080
