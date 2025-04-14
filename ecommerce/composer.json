@@ -1,0 +1,7 @@
+{
+  "name": "musgrave/identity",
+  "type": "project",
+  "require": {
+      "laposa/onyx": "dev-master"
+  }
+}

@@ -5,7 +5,8 @@
  * Copyright (c) 2009-2020 Laposa Limited (https://laposa.ie)
  * Licensed under the New BSD License. See the file LICENSE.txt for details.
  * 
- * For all options and default values look at onyx/conf/global.php
+ * This is configuration shared between development and production environment
+ * For all options and default values look into onyx/conf/global.php
  *
  */
 
@@ -14,32 +15,6 @@
  */
 
 require_once(__DIR__ . '/../vendor/autoload.php');
-
-/**
- * Load env variables
- */
-
-if (file_exists(__DIR__ . "/../.env")) {
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../");
-    $dotenv->load();
-}
-
-/**
- * Application debug settings
- *
- * 0 - No debugging
- * 1 - Basic debugging
- * 5 - Full debugging
- *
- * to enable direct debugging use:
- * define('ONYX_DEBUG_DIRECT', true);
- * 
- */
-
-$debug_hosts = array(
-'x10.0.0.1' => 1,
-'x192.168.0.1' => 1
-);
 
 /**
  * Directory paths
